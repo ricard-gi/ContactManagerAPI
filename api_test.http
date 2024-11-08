@@ -1,0 +1,66 @@
+### Login d'Usuari
+POST http://localhost:5298/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "ricard",
+  "password": "1234"
+}
+
+### Obtenir la Llista de Contactes (Només per Usuari Autentificat)
+GET http://localhost:5298/api/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicmljYXJkIiwiVXNlcklkIjoiMSIsIklzQWRtaW4iOiJUcnVlIiwiZXhwIjoxNzMxMDg3ODU1LCJpc3MiOiJDb250YWN0TWFuYWdlckFQSSIsImF1ZCI6IkNvbnRhY3RNYW5hZ2VyQVBJVXNlciJ9.8ReJdwiIhi5b12fC5NmyaUXE9tncxpjhPuDCqPk6KvI
+
+### Crear un Nou Contacte
+POST http://localhost:5298/api/contacts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicGFjbyIsIlVzZXJJZCI6IjMiLCJJc0FkbWluIjoiRmFsc2UiLCJleHAiOjE3MzEwODc4MjAsImlzcyI6IkNvbnRhY3RNYW5hZ2VyQVBJIiwiYXVkIjoiQ29udGFjdE1hbmFnZXJBUElVc2VyIn0.uby6KnYesLsZ01U7WMrYz8t5uL_iZtq_3sghxRn1mrY
+
+{
+  "name": "Contact forpaco",
+  "phoneNumber": "123456789"
+}
+
+### Editar un Contacte
+PUT http://localhost:5298/api/contacts/1
+Content-Type: application/json
+Authorization: Bearer your_jwt_token
+
+{
+  "name": "Updated Contact Name",
+  "phoneNumber": "987654321"
+}
+
+### Esborrar un Contacte
+DELETE http://localhost:5298/api/contacts/1
+Authorization: Bearer your_jwt_token
+
+### Obtenir la Llista d’Usuaris (Només per Administradors)
+GET http://localhost:5298/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicmljYXJkIiwiVXNlcklkIjoiMSIsIklzQWRtaW4iOiJUcnVlIiwiZXhwIjoxNzMxMDA5MzY0LCJpc3MiOiJDb250YWN0TWFuYWdlckFQSSIsImF1ZCI6IkNvbnRhY3RNYW5hZ2VyQVBJVXNlciJ9.BD9fXNIbY_DAPBu7BIxqiqnTja8_fwOoWSVPRpKlqSw
+
+### Crear un Nou Usuari (Només per Administradors)
+POST http://localhost:5298/api/users
+Content-Type: application/json
+Authorization: Bearer your_admin_jwt_token
+
+{
+  "username": "paco",
+  "password": "1234",
+  "isAdmin": false
+}
+
+### Editar un Usuari (Només per Administradors)
+PUT http://localhost:5298/api/users/1
+Content-Type: application/json
+Authorization: Bearer your_admin_jwt_token
+
+{
+  "username": "updated_user",
+  "isAdmin": false
+}
+
+### Esborrar un Usuari (Només per Administradors)
+DELETE http://localhost:5298/api/users/1
+Authorization: Bearer your_admin_jwt_token
+

@@ -1,0 +1,60 @@
+# Fitxers i carpetes de compilació
+bin/
+obj/
+
+# Configuracions i arxius temporals de Visual Studio Code
+.vscode/
+.vscode/*
+
+# Fitxers de configuració d'usuari
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Paquets de dependències de NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Fitxers de configuració de NuGet
+.nuget/
+
+# Fitxers de configuració d'Entity Framework Migrations
+*.efproject.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# Fitxers de configuració de MSBuild
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Fitxers temporals de cobertura de codi i resultats de test
+TestResults/
+*.coverage
+*.coveragexml
+*.testsettings
+*.vscode-test
+
+# Fitxers de publicació i publicació temporal
+publish/
+publish-temp/
+
+# Fitxers secrets i de configuració local
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# Logs
+*.log
+logs/
+
+# Fitxers generats per dotnet en Windows o Unix
+*.dbmdl
+*.dotCover
+.vs/
+.idea/
