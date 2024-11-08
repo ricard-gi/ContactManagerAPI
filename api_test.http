@@ -3,21 +3,23 @@ POST http://localhost:5298/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "ricard",
+  "username": "ana",
   "password": "1234"
 }
 
 ### Obtenir la Llista de Contactes (Només per Usuari Autentificat)
 GET http://localhost:5298/api/contacts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicmljYXJkIiwiVXNlcklkIjoiMSIsIklzQWRtaW4iOiJUcnVlIiwiZXhwIjoxNzMxMDg3ODU1LCJpc3MiOiJDb250YWN0TWFuYWdlckFQSSIsImF1ZCI6IkNvbnRhY3RNYW5hZ2VyQVBJVXNlciJ9.8ReJdwiIhi5b12fC5NmyaUXE9tncxpjhPuDCqPk6KvI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5hIiwiVXNlcklkIjoiMTAwMiIsIklzQWRtaW4iOiJGYWxzZSIsImV4cCI6MTczMTA5Njg1MCwiaXNzIjoiaHR0cDovL2FwaWNvbnRhY3Rlcy5jb20iLCJhdWQiOiJodHRwOi8vZnJvbnRjb250YWN0ZXMuY29tIn0.tXrukk4LgLX7XQfZHwLjMsiKwul1RlQoTAL4y1F-FW8
+
+
 
 ### Crear un Nou Contacte
 POST http://localhost:5298/api/contacts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicGFjbyIsIlVzZXJJZCI6IjMiLCJJc0FkbWluIjoiRmFsc2UiLCJleHAiOjE3MzEwODc4MjAsImlzcyI6IkNvbnRhY3RNYW5hZ2VyQVBJIiwiYXVkIjoiQ29udGFjdE1hbmFnZXJBUElVc2VyIn0.uby6KnYesLsZ01U7WMrYz8t5uL_iZtq_3sghxRn1mrY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5hIiwiVXNlcklkIjoiMTAwMiIsIklzQWRtaW4iOiJGYWxzZSIsImV4cCI6MTczMTA5NDk5MywiaXNzIjoiaHR0cDovL2FwaWNvbnRhY3Rlcy5jb20iLCJhdWQiOiJodHRwOi8vZnJvbnRjb250YWN0ZXMuY29tIn0.lGErZomYxl3wSfiDnSuE-wg55jIgHQXmP0_YLCL9xao
 
 {
-  "name": "Contact forpaco",
+  "name": "Contact para ana",
   "phoneNumber": "123456789"
 }
 
@@ -37,15 +39,16 @@ Authorization: Bearer your_jwt_token
 
 ### Obtenir la Llista d’Usuaris (Només per Administradors)
 GET http://localhost:5298/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicmljYXJkIiwiVXNlcklkIjoiMSIsIklzQWRtaW4iOiJUcnVlIiwiZXhwIjoxNzMxMDA5MzY0LCJpc3MiOiJDb250YWN0TWFuYWdlckFQSSIsImF1ZCI6IkNvbnRhY3RNYW5hZ2VyQVBJVXNlciJ9.BD9fXNIbY_DAPBu7BIxqiqnTja8_fwOoWSVPRpKlqSw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5hIiwiVXNlcklkIjoiMTAwMiIsIklzQWRtaW4iOiJGYWxzZSIsImV4cCI6MTczMTA5Njg1MCwiaXNzIjoiaHR0cDovL2FwaWNvbnRhY3Rlcy5jb20iLCJhdWQiOiJodHRwOi8vZnJvbnRjb250YWN0ZXMuY29tIn0.tXrukk4LgLX7XQfZHwLjMsiKwul1RlQoTAL4y1F-FW8
+
 
 ### Crear un Nou Usuari (Només per Administradors)
 POST http://localhost:5298/api/users
 Content-Type: application/json
-Authorization: Bearer your_admin_jwt_token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW5hIiwiVXNlcklkIjoiMTAwMiIsIklzQWRtaW4iOiJGYWxzZSIsImV4cCI6MTczMTA5Njg1MCwiaXNzIjoiaHR0cDovL2FwaWNvbnRhY3Rlcy5jb20iLCJhdWQiOiJodHRwOi8vZnJvbnRjb250YWN0ZXMuY29tIn0.tXrukk4LgLX7XQfZHwLjMsiKwul1RlQoTAL4y1F-FW8
 
 {
-  "username": "paco",
+  "username": "pepe",
   "password": "1234",
   "isAdmin": false
 }

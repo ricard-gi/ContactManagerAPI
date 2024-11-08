@@ -13,9 +13,28 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Configura CORS per permetre qualsevol origen, capçalera i mètode
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins", policy =>
+            {
+                policy.AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
+
         // Configura la connexió a la base de dades
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+        // Configura l'autorització amb la política "AdminOnly"
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOnly", policy =>
+                policy.RequireClaim("IsAdmin", "True"));
+        });
 
         builder.Services.AddAuthentication(options =>
         {
@@ -41,6 +60,7 @@ public class Program
         var app = builder.Build();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseCors("AllowAllOrigins");
         app.MapControllers();
 
         app.Run();

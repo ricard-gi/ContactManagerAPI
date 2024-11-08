@@ -12,6 +12,7 @@ namespace contacts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     [Authorize(Policy = "AdminOnly")]
     public class UsersController : ControllerBase
     {
@@ -76,7 +77,7 @@ namespace contacts.Controllers
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [AllowAnonymous]
+        // [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
