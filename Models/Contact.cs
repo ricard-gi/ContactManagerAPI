@@ -11,6 +11,9 @@ namespace contacts.Models
         public string PhoneNumber { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
+
+        // Nova propietat per guardar el nom de la foto
+        public string? PhotoFileName { get; set; }
     }
 
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using contacts.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace contacts.Controllers
 {
@@ -17,10 +19,12 @@ namespace contacts.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         // GET: api/Users
@@ -79,12 +83,16 @@ namespace contacts.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         // [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [AllowAnonymous] // Per accedir sense token a la creació de l'usuari
+        public async Task<IActionResult> Register(User user)
         {
+            // Codificar la contrasenya
+            user.Password = _passwordHasher.HashPassword(user, user.Password);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Register), new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using contacts.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace contacts.Controllers
@@ -18,11 +19,13 @@ namespace contacts.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public AuthController(ApplicationDbContext context, IConfiguration configuration)
+        public AuthController(ApplicationDbContext context, IConfiguration configuration, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
             _configuration = configuration;
+            _passwordHasher = passwordHasher;
         }
 
         [HttpPost("login")]
@@ -30,10 +33,16 @@ namespace contacts.Controllers
         {
             // busquem usuari amb nom i password (password oberta!)
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == loginUser.Username && u.Password == loginUser.Password);
+                .FirstOrDefaultAsync(u => u.Username == loginUser.Username);
 
             // si usuari no existeix tornem Unathorized
             if (user == null)
+                return Unauthorized("Invalid credentials");
+
+
+            // Verificar la contrasenya codificada
+            var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(user, user.Password, loginUser.Password);
+            if (passwordVerificationResult != PasswordVerificationResult.Success)
                 return Unauthorized("Invalid credentials");
 
             /*

@@ -7,6 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using contacts.Models;
 using System.Security.Claims;
 
+// Controllers/ContactsController.cs
+using Microsoft.AspNetCore.Http;
+using System.IO;
+
+
+
 namespace contacts.Controllers
 {
     [Route("api/[controller]")]
@@ -129,5 +135,43 @@ namespace contacts.Controllers
         {
             return _context.Contacts.Any(e => e.Id == id);
         }
+
+        [HttpPost("{id}/upload-photo")]
+        public async Task<IActionResult> UploadPhoto(int id, IFormFile photo)
+        {
+            var contact = await _context.Contacts.FindAsync(id);
+            if (contact == null)
+            {
+                return NotFound("Contact not found");
+            }
+
+            if (photo == null || photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            // Defineix el directori on es guardarà la foto
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+            Directory.CreateDirectory(uploadsFolder); // Crea la carpeta si no existeix
+
+            // Defineix el nom del fitxer
+            var fileName = $"{Guid.NewGuid()}_{photo.FileName}";
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            // Guarda el fitxer al disc
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await photo.CopyToAsync(stream);
+            }
+
+            // Desa el nom del fitxer a la base de dades
+            contact.PhotoFileName = fileName;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { fileName });
+        }
+
+
+
     }
 }

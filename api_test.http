@@ -3,8 +3,8 @@ POST http://localhost:5298/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "ana",
-  "password": "1234"
+  "Username": "admin",
+  "Password": "1234"
 }
 
 ### Obtenir la Llista de Contactes (Només per Usuari Autentificat)
